@@ -3,10 +3,10 @@
 #
 
 CC        := g++
-CFLAGS    := -Wall
+CFLAGS    := -std=c++17 -Wall
 
 TARGET    := code
-LIB       := 
+LIB       :=
 
 SRCDIR    := src
 SRCEXT    := cpp
