@@ -28,7 +28,7 @@ namespace factorio
 			this->position = position;
 		}
 
-		inline bool getJsonString(std::stringstream& stream)
+		inline const bool getJsonString(std::stringstream& stream) const
 		{
 			if (this->level == Level::NONE || !stream.good()) return false;
 
@@ -39,7 +39,8 @@ namespace factorio
 		}
 
 	protected:
-		inline std::string getLevelName(Level level) {
+		inline static std::string getLevelName(Level level)
+		{
 			switch (level)
 			{
 				case STONE_BRICK:

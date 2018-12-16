@@ -59,7 +59,7 @@ public:
 		this->y -= p.y;
 	}
 
-	inline bool getJsonString(std::stringstream& stream)
+	inline bool getJsonString(std::stringstream& stream) const
 	{
 		if (!stream.good()) return false;
 
