@@ -81,6 +81,6 @@ protected:
 private:
 	float x;
 	float y;
-}
+};
 
 #endif // POSITION_H
