@@ -22,11 +22,7 @@ namespace factorio
 			NUM_LEVELS
 		};
 
-		Tile(Level level, Position position)
-		{
-			this->level = level;
-			this->position = position;
-		}
+		Tile(Level n_level, Position n_position) : level(n_level), position(n_position) {}
 
 		inline const bool getJsonString(std::stringstream& stream) const
 		{
