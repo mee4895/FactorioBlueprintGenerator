@@ -6,21 +6,9 @@
 class Position
 {
 public:
-	Position()
-	{
-		this->x = 0;
-		this->y = 0;
-	}
-	Position(int x, int y)
-	{
-		this->x = x;
-		this->y = y;
-	}
-	Position(float x, float y)
-	{
-		this->x = x;
-		this->y = y;
-	}
+	Position() {}
+	Position(int i, int j) : x(i), y(j) {}
+	Position(float i, float j) : x(i), y(j) {}
 
 	inline float getX()
 	{
@@ -79,8 +67,8 @@ public:
 protected:
 
 private:
-	float x;
-	float y;
+	float x = 0;
+	float y = 0;
 };
 
 #endif // POSITION_H
