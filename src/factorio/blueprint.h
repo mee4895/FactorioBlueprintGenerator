@@ -13,13 +13,6 @@ namespace factorio
 {
 	class Blueprint
 	{
-	private:
-		std::string label = "auto-generated blueprint";
-		std::deque<Tile> tiles;
-		long version = DEFAULT_MAP_VERSION;
-
-	protected:
-
 	public:
 		Blueprint() {}
 		Blueprint(std::string name) : label(name) {}
@@ -44,6 +37,13 @@ namespace factorio
 		{
 			this->tiles.push_back(t);
 		}
+
+	protected:
+
+	private:
+		std::string label = "auto-generated blueprint";
+		std::deque<Tile> tiles;
+		long version = DEFAULT_MAP_VERSION;
 	};
 }
 
