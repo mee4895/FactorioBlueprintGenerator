@@ -1,7 +1,7 @@
 #ifndef POSITION_H
 #define POSITION_H
 
-import <sstream>
+#include <sstream>
 
 class Position
 {
