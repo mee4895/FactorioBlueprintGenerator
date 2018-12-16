@@ -30,8 +30,7 @@ namespace factorio
 
 		inline bool getJsonString(std::stringstream& stream)
 		{
-			if (this->level == Level::NONE) return false;
-			if (!stream.good()) return false;
+			if (this->level == Level::NONE || !stream.good()) return false;
 
 			stream << "{\"name\":\"" << getLevelName(this->level) << "\",\"position\":";
 			this->position.getJsonString(stream);
