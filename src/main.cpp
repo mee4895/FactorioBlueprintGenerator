@@ -5,14 +5,16 @@
 #include "factorio/tile.h"
 #include "factorio/blueprint.h"
 #include "factorio/item.h"
+#include "factorio/fluid.h"
 
 int main()
 {
 	factorio::Blueprint blueprint;
 	factorio::Tile tile(factorio::Tile::Level::STONE_BRICK, Position(10, 2));
 
-	factorio::Item item = factorio::Item::CHEMICAL_PLANT;
+	factorio::Item i = factorio::Item::CHEMICAL_PLANT;
 	factorio::Signal s = factorio::Signal::SIGNAL_1;
+	factorio::Fluid f = factorio::Fluid::LUBRICANT;
 
 	blueprint.addTile(tile);
 
