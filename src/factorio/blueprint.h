@@ -30,7 +30,10 @@ namespace factorio
 			if (!stream.good()) return false;
 
 			stream << "{\"blueprint\":{\"item\":\"blueprint\",\"label\":\"" << this->label
-					<< "\",\"version\":" << MAP_VERSION << ",\"icons\":[";
+					<< "\",\"version\":" << MAP_VERSION;
+			if (index >= 0)
+				stream << ",\"index\":" << index;
+			stream << ",\"icons\":[";
 			for (auto it = this->icons.cbegin(); it != this->icons.cend(); ++it)
 			{
 				int index = std::distance(icons.cbegin(), it) + 1;
@@ -45,11 +48,7 @@ namespace factorio
 				(*it).getJsonString(stream);
 				if (std::next(it) != this->tiles.cend()) stream << ",";
 			}
-			stream << "]}";
-
-			if (index >= 0)
-				stream << ",\"index\":" << index;
-			stream << "}";
+			stream << "]}}";
 			return true;
 		}
 

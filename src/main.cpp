@@ -12,7 +12,7 @@ int main()
 	factorio::BlueprintBook book;
 	factorio::Blueprint blueprint;
 
-	factorio::Tile tile(factorio::Tile::Level::STONE_BRICK, Position(10, 2));
+	factorio::Tile tile(Position(10, 2), factorio::Tile::Level::STONE_BRICK);
 
 	factorio::Item i = factorio::Item::CHEMICAL_PLANT;
 	factorio::Signal s = factorio::Signal::SIGNAL_1;

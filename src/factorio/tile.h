@@ -24,7 +24,7 @@ namespace factorio
 			NUM_LEVELS
 		};
 
-		Tile(Level n_level, Position n_position) : level(n_level), position(n_position) {}
+		Tile(Position n_position, Level n_level = Level::NONE) : position(n_position), level(n_level) {}
 
 		inline const bool getJsonString(std::stringstream& stream) const
 		{
@@ -61,8 +61,8 @@ namespace factorio
 		}
 
 	private:
-		Level level;
 		Position position;
+		Level level;
 	};
 }
 
