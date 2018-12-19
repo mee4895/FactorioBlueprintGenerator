@@ -15,9 +15,11 @@ namespace factorio
 			NONE,
 			STONE_BRICK,
 			CONCRETE,
-			HAZARD_CONCRETE,
+			HAZARD_CONCRETE_LEFT,
+			HAZARD_CONCRETE_RIGHT,
 			REFINED_CONCRETE,
-			REFINED_HAZARD_CONCRETE,
+			REFINED_HAZARD_CONCRETE_LEFT,
+			REFINED_HAZARD_CONCRETE_RIGHT,
 
 			NUM_LEVELS
 		};
@@ -40,15 +42,19 @@ namespace factorio
 			switch (level)
 			{
 				case STONE_BRICK:
-					return "stone-brick";
+					return "stone-path";
 				case CONCRETE:
 					return "concrete";
-				case HAZARD_CONCRETE:
-					return "hazard-concrete";
+				case HAZARD_CONCRETE_LEFT:
+					return "hazard-concrete-left";
+				case HAZARD_CONCRETE_RIGHT:
+					return "hazard-concrete-right";
 				case REFINED_CONCRETE:
 					return "refined-concrete";
-				case REFINED_HAZARD_CONCRETE:
-					return "refined-hazard-concrete";
+				case REFINED_HAZARD_CONCRETE_LEFT:
+					return "refined-hazard-concrete-left";
+				case REFINED_HAZARD_CONCRETE_RIGHT:
+					return "refined-hazard-concrete-right";
 				default:
 					return "";
 			}

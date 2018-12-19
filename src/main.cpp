@@ -9,7 +9,9 @@
 
 int main()
 {
+	factorio::BlueprintBook book;
 	factorio::Blueprint blueprint;
+
 	factorio::Tile tile(factorio::Tile::Level::STONE_BRICK, Position(10, 2));
 
 	factorio::Item i = factorio::Item::CHEMICAL_PLANT;
@@ -18,8 +20,14 @@ int main()
 
 	blueprint.addTile(tile);
 
+	blueprint.addIcon(i);
+	blueprint.addIcon(s);
+	blueprint.addIcon(f);
+
+	book.addBlueprint(blueprint);
+
 	std::stringstream stream;
-	blueprint.getJsonString(stream);
+	book.getJsonString(stream);
 	std::cout << stream.str() << std::endl;
 
 	return 0;
