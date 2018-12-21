@@ -6,7 +6,7 @@ CC        := g++
 CFLAGS    := -std=c++17 -Wall
 
 TARGET    := code
-LIB       :=
+LIB       := -lz
 
 SRCDIR    := src
 SRCEXT    := cpp
@@ -21,6 +21,9 @@ OBJECTS   := $(patsubst $(SRCDIR)/%,$(OUTDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OUTEXT))
 
 
 all: $(BINDIR)/$(TARGET)
+
+dbbs: CFLAGS := $(CFLAGS) -D'DONT_BUILD_BLUEPRINT_STRING'
+dbbs: all
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
 	$(CC) $^ $(LIB) -o $@
