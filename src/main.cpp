@@ -4,8 +4,7 @@
 #include "position.h"
 #include "factorio/tile.h"
 #include "factorio/blueprint.h"
-#include "factorio/item.h"
-#include "factorio/fluid.h"
+#include "factorio/signals.h"
 
 int main()
 {

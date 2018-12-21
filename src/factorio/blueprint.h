@@ -25,6 +25,11 @@ namespace factorio
 			icons.reserve(4);
 		}
 
+		inline const std::string getLabel() const
+		{
+			return label;
+		}
+
 		const bool getJsonString(std::stringstream& stream, const int index = -1) const
 		{
 			if (!stream.good()) return false;
@@ -52,6 +57,11 @@ namespace factorio
 			return true;
 		}
 
+		inline void setLabel(std::string name)
+		{
+			this->label = name;
+		}
+
 		inline void addTile(const Tile& t)
 		{
 			this->tiles.push_back(t);
@@ -77,6 +87,11 @@ namespace factorio
 		BlueprintBook() : BlueprintBook(DEFAULT_BLUEPRINT_BOOK_NAME) {}
 		BlueprintBook(std::string name) : label(name) {}
 
+		inline const std::string getLabel() const
+		{
+			return label;
+		}
+
 		const bool getJsonString(std::stringstream& stream) const
 		{
 			if (!stream.good()) return false;
@@ -92,6 +107,11 @@ namespace factorio
 			}
 			stream << "]}}";
 			return true;
+		}
+
+		inline void setLabel(std::string name)
+		{
+			this->label = name;
 		}
 
 		inline void addBlueprint(const Blueprint& b)
