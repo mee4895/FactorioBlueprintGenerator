@@ -16,7 +16,7 @@ BINDIR    := bin
 INCDIR    := inc
 DOCDIR    := doc
 
-SOURCES   := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+SOURCES   := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT) ! -wholename src/cpp-base64/test.cpp)
 OBJECTS   := $(patsubst $(SRCDIR)/%,$(OUTDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OUTEXT)))
 
 
