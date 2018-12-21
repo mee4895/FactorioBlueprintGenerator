@@ -10,7 +10,6 @@
 #ifndef DONT_BUILD_BLUEPRINT_STRING
 
 #define CHUNK 16384
-#include "cstring"
 #include "zlib.h"
 #include "cpp-base64/base64.h"
 
