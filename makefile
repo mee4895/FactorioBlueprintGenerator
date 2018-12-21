@@ -6,7 +6,7 @@ CC        := g++
 CFLAGS    := -std=c++17 -Wall
 
 TARGET    := code
-LIB       := -lz
+LIB       :=
 
 SRCDIR    := src
 SRCEXT    := cpp
@@ -19,11 +19,11 @@ DOCDIR    := doc
 SOURCES   := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT) ! -wholename src/cpp-base64/test.cpp)
 OBJECTS   := $(patsubst $(SRCDIR)/%,$(OUTDIR)/%,$(SOURCES:.$(SRCEXT)=.$(OUTEXT)))
 
-
+all: LIB := $(LIB) -lz
 all: $(BINDIR)/$(TARGET)
 
 dbbs: CFLAGS := $(CFLAGS) -D'DONT_BUILD_BLUEPRINT_STRING'
-dbbs: all
+dbbs: $(BINDIR)/$(TARGET)
 
 $(BINDIR)/$(TARGET): $(OBJECTS)
 	$(CC) $^ $(LIB) -o $@
