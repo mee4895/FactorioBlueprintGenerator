@@ -41,11 +41,11 @@ const std::string json2bps(const std::string data)
 }
 #endif // DONT_BUILD_BLUEPRINT_STRING
 
-void output(const factorio::Blueprint blueprint)
+void output(const factorio::BlueprintBase* blueprint)
 {
 	std::stringstream stream;
 
-	blueprint.getJsonString(stream);
+	blueprint->getJsonString(stream);
 	std::cout << stream.str() << std::endl;
 
 #ifndef DONT_BUILD_BLUEPRINT_STRING
@@ -72,6 +72,6 @@ int main()
 
 	book.addBlueprint(blueprint);
 
-	output(blueprint);
+	output(&book);
 	return 0;
 }

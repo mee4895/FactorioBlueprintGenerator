@@ -16,25 +16,47 @@
 
 namespace factorio
 {
-	class Blueprint
+	class BlueprintBase
 	{
 	public:
-		Blueprint() : Blueprint(DEFAULT_BLUEPRINT_NAME) {}
-		Blueprint(std::string name) : label(name)
-		{
-			icons.reserve(4);
-		}
+		BlueprintBase(std::string name): label(name) {}
 
 		inline const std::string getLabel() const
 		{
 			return label;
 		}
 
-		const bool getJsonString(std::stringstream& stream, const int index = -1) const
+		virtual const bool getJsonString(std::stringstream& stream) const = 0;
+
+		inline void setLabel(std::string name)
+		{
+			this->label = name;
+		}
+
+	protected:
+
+	private:
+		std::string label;
+	};
+
+	class Blueprint : public BlueprintBase
+	{
+	public:
+		Blueprint() : Blueprint(DEFAULT_BLUEPRINT_NAME) {}
+		Blueprint(std::string name) : BlueprintBase(name)
+		{
+			icons.reserve(4);
+		}
+
+		const bool getJsonString(std::stringstream& stream) const override
+		{
+			return getJsonString(stream, -1);
+		}
+		const bool getJsonString(std::stringstream& stream, const int index) const
 		{
 			if (!stream.good()) return false;
 
-			stream << "{\"blueprint\":{\"item\":\"blueprint\",\"label\":\"" << this->label
+			stream << "{\"blueprint\":{\"item\":\"blueprint\",\"label\":\"" << getLabel()
 					<< "\",\"version\":" << MAP_VERSION;
 			if (index >= 0)
 				stream << ",\"index\":" << index;
@@ -57,11 +79,6 @@ namespace factorio
 			return true;
 		}
 
-		inline void setLabel(std::string name)
-		{
-			this->label = name;
-		}
-
 		inline void addTile(const Tile& t)
 		{
 			this->tiles.push_back(t);
@@ -76,28 +93,22 @@ namespace factorio
 	protected:
 
 	private:
-		std::string label;
 		std::deque<Tile> tiles;
 		std::vector<Signal> icons;
 	};
 
-	class BlueprintBook
+	class BlueprintBook : public BlueprintBase
 	{
 	public:
 		BlueprintBook() : BlueprintBook(DEFAULT_BLUEPRINT_BOOK_NAME) {}
-		BlueprintBook(std::string name) : label(name) {}
+		BlueprintBook(std::string name) : BlueprintBase(name) {}
 
-		inline const std::string getLabel() const
-		{
-			return label;
-		}
-
-		const bool getJsonString(std::stringstream& stream) const
+		const bool getJsonString(std::stringstream& stream) const override
 		{
 			if (!stream.good()) return false;
 
 			stream << "{\"blueprint_book\":{\"item\":\"blueprint-book\",\"label\":\""
-					<< this->label << "\",\"active_index\":0,\"version\":" << MAP_VERSION
+					<< getLabel() << "\",\"active_index\":0,\"version\":" << MAP_VERSION
 					<< ",\"blueprints\":[";
 			for (auto it = this->blueprints.cbegin(); it != this->blueprints.cend(); ++it)
 			{
@@ -109,11 +120,6 @@ namespace factorio
 			return true;
 		}
 
-		inline void setLabel(std::string name)
-		{
-			this->label = name;
-		}
-
 		inline void addBlueprint(const Blueprint& b)
 		{
 			this->blueprints.push_back(b);
@@ -122,7 +128,6 @@ namespace factorio
 	protected:
 
 	private:
-		std::string label;
 		std::deque<Blueprint> blueprints;
 	};
 }
