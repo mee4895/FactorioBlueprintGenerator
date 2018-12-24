@@ -10,9 +10,17 @@ public:
 	Position(int i, int j) : x(i), y(j) {}
 	Position(float i, float j) : x(i), y(j) {}
 
+	inline const float getX() const
+	{
+		return this->x;
+	}
 	inline float getX()
 	{
 		return this->x;
+	}
+	inline const float getY() const
+	{
+		return this->y;
 	}
 	inline float getY()
 	{
