@@ -1,8 +1,6 @@
 #include "generator/static/tilegen.h"
 
-using namespace generator::static_;
-
-void TileGen::generateRectangle(factorio::Blueprint& blueprint,
+void generator::static_::generateRectangle(factorio::Blueprint& blueprint,
 		factorio::Tile::Level level, const int x_size, const int y_size,
 		const int x_offset, const int y_offset)
 {
@@ -15,7 +13,7 @@ void TileGen::generateRectangle(factorio::Blueprint& blueprint,
 	}
 }
 
-void TileGen::generateBorder(factorio::Blueprint& blueprint,
+void generator::static_::generateBorder(factorio::Blueprint& blueprint,
 		factorio::Tile::Level level, const int x_size, const int y_size,
 		const int x_offset, const int y_offset)
 {

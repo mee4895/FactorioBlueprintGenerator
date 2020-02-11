@@ -9,31 +9,23 @@ namespace generator
 {
 	namespace static_
 	{
-		class TileGen
+		inline void generateRectangle(factorio::Blueprint& blueprint,
+				factorio::Tile::Level level, const Position size, const Position offset)
 		{
-		public:
-			static inline void generateRectangle(factorio::Blueprint& blueprint,
-					factorio::Tile::Level level, const Position size, const Position offset)
-			{
-				generateRectangle(blueprint, level, size.getX(), size.getY(), offset.getX(), offset.getY());
-			}
-			static void generateRectangle(factorio::Blueprint& blueprint,
-					factorio::Tile::Level level, const int x_size, const int y_size,
-					const int x_offset, const int y_offset);
+			generateRectangle(blueprint, level, size.getX(), size.getY(), offset.getX(), offset.getY());
+		}
+		void generateRectangle(factorio::Blueprint& blueprint,
+				factorio::Tile::Level level, const int x_size, const int y_size,
+				const int x_offset, const int y_offset);
 
-			static inline void generateBorder(factorio::Blueprint& blueprint,
-					factorio::Tile::Level level, const Position size, const Position offset)
-			{
-				generateBorder(blueprint, level, size.getX(), size.getY(), offset.getX(), offset.getY());
-			}
-			static void generateBorder(factorio::Blueprint& blueprint,
-					factorio::Tile::Level level, const int x_size, const int y_size,
-					const int x_offset, const int y_offset);
-
-		protected:
-
-		private:
-		};
+		inline void generateBorder(factorio::Blueprint& blueprint,
+				factorio::Tile::Level level, const Position size, const Position offset)
+		{
+			generateBorder(blueprint, level, size.getX(), size.getY(), offset.getX(), offset.getY());
+		}
+		void generateBorder(factorio::Blueprint& blueprint,
+				factorio::Tile::Level level, const int x_size, const int y_size,
+				const int x_offset, const int y_offset);
 	}
 }
 

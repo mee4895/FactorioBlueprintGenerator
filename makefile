@@ -3,7 +3,7 @@
 #
 
 CC      := g++
-CFLAGS  := -std=c++17 -MMD -MP -Wall
+CFLAGS  := -std=c++17 -Og -MMD -MP -Wall
 LD      := g++
 LDFLAGS :=
 

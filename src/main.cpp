@@ -6,9 +6,12 @@
 #include "cpp-base64/base64.h"
 
 #include "position.h"
+
 #include "factorio/tile.h"
 #include "factorio/blueprint.h"
 #include "factorio/signals.h"
+
+#include "generator/static/tilegen.h"
 
 #define CHUNK 16384
 
@@ -58,6 +61,8 @@ int main()
 	factorio::Item i = factorio::Item::CHEMICAL_PLANT;
 	factorio::Signal s = factorio::Signal::SIGNAL_1;
 	factorio::Fluid f = factorio::Fluid::LUBRICANT;
+
+	generator::static_::generateRectangle(blueprint, factorio::Tile::Level::CONCRETE, 8, 8, -4, -4);
 
 	blueprint.addTile(tile);
 
