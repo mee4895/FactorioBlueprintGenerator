@@ -1,17 +1,17 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+
+#include "zlib.h"
+#include "cpp-base64/base64.h"
+
 #include "position.h"
 #include "factorio/tile.h"
 #include "factorio/blueprint.h"
 #include "factorio/signals.h"
 
-
-#ifndef DONT_BUILD_BLUEPRINT_STRING
-
 #define CHUNK 16384
-#include "zlib.h"
-#include "cpp-base64/base64.h"
+
 
 const std::string json2bps(const std::string data)
 {
@@ -38,7 +38,6 @@ const std::string json2bps(const std::string data)
 	// base64 encode and return
 	return "0" + base64_encode(out, CHUNK - defstream.avail_out);
 }
-#endif // DONT_BUILD_BLUEPRINT_STRING
 
 void output(const factorio::BlueprintBase* blueprint)
 {
@@ -46,10 +45,7 @@ void output(const factorio::BlueprintBase* blueprint)
 
 	blueprint->getJsonString(stream);
 	std::cout << stream.str() << std::endl;
-
-#ifndef DONT_BUILD_BLUEPRINT_STRING
 	std::cout << json2bps(stream.str()) << std::endl;
-#endif // DONT_BUILD_BLUEPRINT_STRING
 }
 
 int main()

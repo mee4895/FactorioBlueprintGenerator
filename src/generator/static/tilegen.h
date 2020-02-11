@@ -24,7 +24,7 @@ namespace generator
 			static inline void generateBorder(factorio::Blueprint& blueprint,
 					factorio::Tile::Level level, const Position size, const Position offset)
 			{
-				generateRectangle(blueprint, level, size.getX(), size.getY(), offset.getX(), offset.getY());
+				generateBorder(blueprint, level, size.getX(), size.getY(), offset.getX(), offset.getY());
 			}
 			static void generateBorder(factorio::Blueprint& blueprint,
 					factorio::Tile::Level level, const int x_size, const int y_size,
