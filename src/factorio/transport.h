@@ -1,13 +1,15 @@
-#ifndef BELT_H
-#define BELT_H
+#ifndef TRANSPORT_H
+#define TRANSPORT_H
 
 #include <string>
 #include <sstream>
+
+#include "factorio/entity.h"
 #include "factorio/location.h"
 
 namespace factorio
 {
-	enum Tier
+	enum TransportTier
 	{
 		NONE,
 		YELLOW,
@@ -17,7 +19,7 @@ namespace factorio
 		NUM_TIERS
 	};
 
-	class Belt
+	class Belt : public Entity
 	{
 	public:
 		/**
@@ -27,30 +29,11 @@ namespace factorio
 		 * @param n_tier The tier of the new belt entity
 		 * @param n_direction The direction of the new belt entity
 		 */
-		Belt(Position n_position, Tier n_tier = Tier::NONE, Direction n_direction = Direction::NORTH) :
-				position(n_position), tier(n_tier), direction(n_direction) {}
+		Belt(Position n_position, TransportTier n_tier = TransportTier::NONE,
+				Direction n_direction = Direction::NORTH) :
+				Entity(n_position), tier(n_tier), direction(n_direction) {}
 
-		inline bool getJsonString(std::stringstream& stream, int entity_number = 0) const
-		{
-			if (this->tier == Tier::NONE || !stream.good()) return false;
-
-			stream << "{";
-			if (entity_number == 0)
-			{
-				stream << "\"entity_number\":" << entity_number << ",";
-			}
-			stream << "\"name\":\"" << getTierName(tier) << "\"," << "\"position\":";
-			if (!this->position.getJsonString(stream)) return false;
-			if (this->direction == 2 || this->direction == 4 || this->direction == 6)
-			{
-				stream << "," << "\"direction\":" << this->direction;
-			}
-			stream << "}";
-			return true;
-		}
-
-	protected:
-		inline static std::string getTierName(Tier tier)
+		std::string getName() const
 		{
 			switch (tier)
 			{
@@ -65,11 +48,29 @@ namespace factorio
 			}
 		}
 
+		bool getJsonString(std::stringstream& stream, int entity_number = 0) const
+		{
+			if (this->tier == TransportTier::NONE || !stream.good()) return false;
+
+			stream << "{";
+			if (entity_number == 0)
+			{
+				stream << "\"entity_number\":" << entity_number << ",";
+			}
+			stream << "\"name\":\"" << getName() << "\"," << "\"position\":";
+			if (!this->position.getJsonString(stream)) return false;
+			if (this->direction == 2 || this->direction == 4 || this->direction == 6)
+			{
+				stream << "," << "\"direction\":" << this->direction;
+			}
+			stream << "}";
+			return true;
+		}
+
 	private:
-		Position position;
+		TransportTier tier;
 		Direction direction;
-		Tier tier;
 	};
 }
 
-#endif // BELT_H
+#endif // TRANSPORT_H

@@ -9,6 +9,7 @@
 #include "factorio/tile.h"
 #include "factorio/blueprint.h"
 #include "factorio/signals.h"
+#include "factorio/transport.h"
 
 #include "generator/static/tilegen.h"
 
