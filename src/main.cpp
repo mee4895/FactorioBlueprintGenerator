@@ -5,8 +5,7 @@
 #include "zlib.h"
 #include "cpp-base64/base64.h"
 
-#include "position.h"
-
+#include "factorio/location.h"
 #include "factorio/tile.h"
 #include "factorio/blueprint.h"
 #include "factorio/signals.h"
@@ -56,7 +55,7 @@ int main()
 	factorio::BlueprintBook book;
 	factorio::Blueprint blueprint;
 
-	factorio::Tile tile(Position(10, 2), factorio::Tile::Level::STONE_BRICK);
+	factorio::Tile tile(factorio::Position(10, 2), factorio::Tile::Level::STONE_BRICK);
 
 	factorio::Item i = factorio::Item::CHEMICAL_PLANT;
 	factorio::Signal s = factorio::Signal::SIGNAL_1;

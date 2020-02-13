@@ -3,7 +3,7 @@
 
 #include <string>
 #include <sstream>
-#include "position.h"
+#include "factorio/location.h"
 
 namespace factorio
 {
@@ -31,7 +31,7 @@ namespace factorio
 			if (this->level == Level::NONE || !stream.good()) return false;
 
 			stream << "{\"name\":\"" << getLevelName(this->level) << "\",\"position\":";
-			this->position.getJsonString(stream);
+			if (!this->position.getJsonString(stream)) return false;
 			stream << "}";
 			return true;
 		}

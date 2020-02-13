@@ -3,7 +3,7 @@
 #
 
 CC      := g++
-CFLAGS  := -std=c++17 -Og -MMD -MP -Wall
+CFLAGS  := -std=c++17 -g -Og -MMD -MP -Wall
 LD      := g++
 LDFLAGS :=
 
@@ -32,6 +32,6 @@ $(OUTDIR)/%.$(OUTEXT): $(SRCDIR)/%.$(SRCEXT)
 	$(CC) $(CFLAGS) -I ./$(SRCDIR) -I ./$(INCDIR) -c $< -o $@
 
 clean:
-	rm -r $(OUTDIR)/* $(BINDIR)/$(TARGET)
+	rm -rf $(OUTDIR)/* $(BINDIR)/$(TARGET)
 
 -include $(OBJECTS:%.$(OUTEXT)=%.$(INCEXT))

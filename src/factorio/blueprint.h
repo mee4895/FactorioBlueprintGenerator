@@ -65,14 +65,14 @@ namespace factorio
 			{
 				int index = std::distance(icons.cbegin(), it) + 1;
 				stream << "{\"index\":" << index << ",\"signal\":";
-				(*it).getJsonString(stream);
+				it->getJsonString(stream);
 				stream << "}";
 				if (std::next(it) != this->icons.cend()) stream << ",";
 			}
 			stream << "],\"tiles\":[";
 			for (auto it = this->tiles.cbegin(); it != this->tiles.cend(); ++it)
 			{
-				(*it).getJsonString(stream);
+				it->getJsonString(stream);
 				if (std::next(it) != this->tiles.cend()) stream << ",";
 			}
 			stream << "]}}";
