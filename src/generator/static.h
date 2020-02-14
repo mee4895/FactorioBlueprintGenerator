@@ -1,9 +1,10 @@
-#ifndef TILEGEN_H
-#define TILEGEN_H
+#ifndef STATIC_H
+#define STATIC_H
 
 #include "factorio/location.h"
 #include "factorio/tile.h"
 #include "factorio/blueprint.h"
+#include "factorio/transport.h"
 
 namespace generator
 {
@@ -26,7 +27,13 @@ namespace generator
 		{
 			generateBorder(blueprint, level, size.getX(), size.getY(), offset.getX(), offset.getY());
 		}
+
+		void generateBeltPath(factorio::Blueprint& blueprint, factorio::TransportTier tier, const int x_start, const int y_start, const int x_end, const int y_end);
+		inline void generateBeltPath(factorio::Blueprint& blueprint, factorio::TransportTier tier, const factorio::Position start, const factorio::Position end)
+		{
+			generateBeltPath(blueprint, tier, start.getX(), start.getY(), end.getX(), end.getY());
+		}
 	}
 }
 
-#endif // TILEGEN_H
+#endif // STATIC_H

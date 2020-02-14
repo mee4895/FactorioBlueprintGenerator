@@ -11,7 +11,7 @@
 #include "factorio/signals.h"
 #include "factorio/transport.h"
 
-#include "generator/static/tilegen.h"
+#include "generator/static.h"
 
 #define CHUNK 16384
 
@@ -51,6 +51,16 @@ void output(const factorio::BlueprintBase* blueprint)
 	std::cout << json2bps(stream.str()) << std::endl;
 }
 
+//void tmp()
+//{
+//	factorio::BlueprintBook book;
+//	factorio::Blueprint print;
+//
+//	book.blueprints.push_back(print);
+//
+//	output(&book);
+//}
+
 int main()
 {
 	factorio::BlueprintBook book;
@@ -64,13 +74,22 @@ int main()
 
 	generator::static_::generateRectangle(blueprint, factorio::Tile::Level::CONCRETE, 8, 8, -4, -4);
 
-	blueprint.addTile(tile);
+	generator::static_::generateBeltPath(
+		blueprint,
+		factorio::TransportTier::RED,
+		factorio::Position(5, 12),
+		factorio::Position(5, 12)
+	);
+
+	blueprint.entities.emplace_back(new factorio::Belt(factorio::Position(10, 2), factorio::TransportTier::RED, factorio::Direction::WEST));
+
+	blueprint.tiles.push_back(tile);
 
 	blueprint.addIcon(i);
 	blueprint.addIcon(s);
 	blueprint.addIcon(f);
 
-	book.addBlueprint(blueprint);
+	book.blueprints.push_back(blueprint);
 
 	output(&book);
 	return 0;

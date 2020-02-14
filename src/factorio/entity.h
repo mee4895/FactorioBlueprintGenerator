@@ -3,6 +3,7 @@
 
 #include <string>
 #include <sstream>
+#include <exception>
 #include "factorio/location.h"
 
 namespace factorio
@@ -11,6 +12,7 @@ namespace factorio
 	{
 	public:
 		Entity(Position p) : position(p) {}
+		virtual ~Entity() {}
 
 		virtual std::string getName() const = 0;
 		virtual bool getJsonString(std::stringstream& stream, int entity_number = 0) const = 0;

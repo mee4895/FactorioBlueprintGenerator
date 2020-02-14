@@ -9,8 +9,11 @@
 #include <deque>
 #include <vector>
 #include <string>
+#include <memory>
+#include <exception>
 #include <sstream>
 #include <iterator>
+#include "factorio/entity.h"
 #include "factorio/tile.h"
 #include "factorio/signals.h"
 
@@ -42,6 +45,9 @@ namespace factorio
 	class Blueprint : public BlueprintBase
 	{
 	public:
+		std::deque<std::unique_ptr<Entity>> entities;
+		std::deque<Tile> tiles;
+
 		Blueprint() : Blueprint(DEFAULT_BLUEPRINT_NAME) {}
 		Blueprint(std::string name) : BlueprintBase(name)
 		{
@@ -60,6 +66,7 @@ namespace factorio
 					<< "\",\"version\":" << MAP_VERSION;
 			if (index >= 0)
 				stream << ",\"index\":" << index;
+
 			stream << ",\"icons\":[";
 			for (auto it = this->icons.cbegin(); it != this->icons.cend(); ++it)
 			{
@@ -69,6 +76,15 @@ namespace factorio
 				stream << "}";
 				if (std::next(it) != this->icons.cend()) stream << ",";
 			}
+
+			stream << "],\"entities\":[";
+			for (auto it = this->entities.cbegin(); it != this->entities.cend(); ++it)
+			{
+				int index = std::distance(this->entities.cbegin(), it) + 1;
+				(*it)->getJsonString(stream, index);
+				if (std::next(it) != this->entities.cend()) stream << ",";
+			}
+
 			stream << "],\"tiles\":[";
 			for (auto it = this->tiles.cbegin(); it != this->tiles.cend(); ++it)
 			{
@@ -79,31 +95,27 @@ namespace factorio
 			return true;
 		}
 
-		inline void addTile(const Tile& t)
-		{
-			this->tiles.push_back(t);
-		}
-
 		inline void addIcon(const Signal& s)
 		{
-			if (this->icons.size() >= 4) return;
+			if (this->icons.size() >= 4) throw std::overflow_error("Only 4 icons are allowed.");
 			this->icons.push_back(s);
 		}
 
 	protected:
 
 	private:
-		std::deque<Tile> tiles;
 		std::vector<Signal> icons;
 	};
 
 	class BlueprintBook : public BlueprintBase
 	{
 	public:
+		std::deque<Blueprint> blueprints;
+
 		BlueprintBook() : BlueprintBook(DEFAULT_BLUEPRINT_BOOK_NAME) {}
 		BlueprintBook(std::string name) : BlueprintBase(name) {}
 
-		const bool getJsonString(std::stringstream& stream) const override
+		const bool getJsonString(std::stringstream& stream) const
 		{
 			if (!stream.good()) return false;
 
@@ -119,16 +131,6 @@ namespace factorio
 			stream << "]}}";
 			return true;
 		}
-
-		inline void addBlueprint(const Blueprint& b)
-		{
-			this->blueprints.push_back(b);
-		}
-
-	protected:
-
-	private:
-		std::deque<Blueprint> blueprints;
 	};
 }
 

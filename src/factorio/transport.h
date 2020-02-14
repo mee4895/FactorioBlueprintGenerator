@@ -53,7 +53,7 @@ namespace factorio
 			if (this->tier == TransportTier::NONE || !stream.good()) return false;
 
 			stream << "{";
-			if (entity_number == 0)
+			if (entity_number != 0)
 			{
 				stream << "\"entity_number\":" << entity_number << ",";
 			}
